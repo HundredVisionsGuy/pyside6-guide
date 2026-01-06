@@ -5,10 +5,14 @@ A demo of the two main types of spinboxes
 """
 
 import sys
+from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
     QApplication,
+    QDoubleSpinBox,
+    QHBoxLayout,
     QLabel,
     QMainWindow,
+    QSpinBox,
     QVBoxLayout,
     QWidget,
 )
@@ -23,6 +27,8 @@ class MainWindow(QMainWindow):
         self.resize(320, 240)
 
         layout = QVBoxLayout()
+        title_label = QLabel("Title of this App")
+
         self.instructions = "Make an app that gets two different numbers: "
         self.instructions += "a whole number (integer) and a number with "
         self.instructions += "a decimal point (float). Put them each in "
@@ -38,6 +44,30 @@ class MainWindow(QMainWindow):
         self.instructions_label.setWordWrap(True)
 
         # TODO: Create An HBox Layout with a QSpinBox that gets a whole number
+        age_input_hbox = QHBoxLayout()
+        age_label = QLabel("Age: ")
+        self.age_spinbox = QSpinBox()
+        self.age_spinbox.valueChanged.connect(self.value_changed)
+        self.age_spinbox.textChanged.connect(self.value_changed_str)
+        age_input_hbox.setAlignment(Qt.AlignmentFlag.AlignHCenter)
+
+        # set minimum and maximum possible numbers
+        self.age_spinbox.setMinimum(1)
+        self.age_spinbox.setMaximum(120)
+
+        # double spinbox
+        self.double_spinbox = QDoubleSpinBox()
+        self.double_spinbox.setPrefix("$")
+        self.double_spinbox.setSingleStep(0.25)
+        self.double_spinbox.valueChanged.connect(self.value_changed)
+        self.double_spinbox.textChanged.connect(self.value_changed_str)
+        double_label = QLabel("Get Number:")
+        
+        # Add label and button to layout
+        age_input_hbox.addWidget(age_label)
+        age_input_hbox.addWidget(self.age_spinbox)
+        age_input_hbox.addWidget(double_label)
+        age_input_hbox.addWidget(self.double_spinbox)
 
         # TODO: Create another HBox that gets a number with a decimal point
 
@@ -56,6 +86,8 @@ class MainWindow(QMainWindow):
         """
 
         # add widgets & layouts to main layout
+        layout.addWidget(title_label)
+        layout.addLayout(age_input_hbox)
         layout.addWidget(self.instructions_label)
 
         # [OPTIONAL] Add a stretch to move everything up
@@ -67,6 +99,11 @@ class MainWindow(QMainWindow):
         # Set the central widget of the Window.
         self.setCentralWidget(widget)
 
+    def value_changed(self, value):
+        print(f"Value Changed: doublespinbox: {value} - spinbox: {self.age_spinbox.value()}")
+
+    def value_changed_str(self, str_value):
+        print(f"Value Changed (as string): {str_value}")
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
