@@ -24,7 +24,7 @@ class MainWindow(QMainWindow):
 
         self.setWindowTitle("Window Title")
         self.setContentsMargins(12, 12, 12, 12)
-        self.resize(320, 240)
+        self.resize(500, 700)
 
         layout = QVBoxLayout()
         title_label = QLabel("Title of this App")
@@ -54,6 +54,7 @@ class MainWindow(QMainWindow):
         # set minimum and maximum possible numbers
         self.age_spinbox.setMinimum(1)
         self.age_spinbox.setMaximum(120)
+        self.age_spinbox.setSuffix(" yrs. old")
 
         # double spinbox
         self.double_spinbox = QDoubleSpinBox()
@@ -89,12 +90,13 @@ class MainWindow(QMainWindow):
         layout.addWidget(title_label)
         layout.addLayout(age_input_hbox)
         layout.addWidget(self.instructions_label)
-
+        
         # [OPTIONAL] Add a stretch to move everything up
         layout.addStretch()
 
         widget = QWidget()
         widget.setLayout(layout)
+        widget.setStyleSheet("font-size: 20pt;")
 
         # Set the central widget of the Window.
         self.setCentralWidget(widget)

@@ -111,6 +111,7 @@ class MainWindow(QMainWindow):
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
         central_widget = QWidget()
+        
         # This container holds the window contents, so we can style it.
         central_widget.setObjectName("Container")
         central_widget.setStyleSheet(
