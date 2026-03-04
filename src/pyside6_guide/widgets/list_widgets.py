@@ -23,7 +23,7 @@ class MainWindow(QMainWindow):
 
         self.setWindowTitle("Window Title")
         self.setContentsMargins(12, 12, 12, 12)
-        self.resize(320, 240)
+        self.resize(380, 340)
         self.setStyleSheet(
             """background: #336699;
             color: #ffffff;"""

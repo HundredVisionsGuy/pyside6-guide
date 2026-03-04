@@ -14,7 +14,6 @@ from PySide6.QtWidgets import (
     QFileDialog,
     QHBoxLayout,
     QLabel,
-    QLineEdit,
     QMainWindow,
     QPushButton,
     QVBoxLayout,
@@ -41,11 +40,9 @@ class MainWindow(QMainWindow):
         # TODO: add a file dialog to open a file (image) and load an image
         file_browse_layout = QHBoxLayout()
         file_label = QLabel("File:")
-        # self.filename_edit = QLineEdit()
         self.file_browse = QPushButton("Choose Image")
         self.file_browse.clicked.connect(self.open_file_dialog)
         file_browse_layout.addWidget(file_label)
-        # file_browse_layout.addWidget(self.filename_edit)
         file_browse_layout.addWidget(self.file_browse)
 
         # TODO: add a push button to 
@@ -76,8 +73,8 @@ class MainWindow(QMainWindow):
         filename, ok = QFileDialog.getOpenFileName(
             self,
             "Select an Image File",
-            r"C:\\Pictures\\",
-            "Images (*.png *.jpg)"
+            "",
+            "Images (*.png *.jpg *.gif)"
         )
         if filename:
             path = Path(filename)
